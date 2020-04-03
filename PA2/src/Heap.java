@@ -62,13 +62,14 @@ public class Heap {
      * @return the minimum element of the heap, AND removes the element from said heap.
      */
     public City extractMin() {
-    	City minCity = minHeap.get(0);
-    	swap(0, minHeap.size() - 1);
-    	minHeap.get(0).setCityIndex(0);
-    	minHeap.get(minHeap.size() - 1).setCityIndex(minHeap.size() - 1);
-    	minHeap.remove(minHeap.size()-1);
-    	siftDown(0);
-        return minCity;
+    	if(minHeap.size() != 0) {
+    		City minCity = minHeap.get(0);
+        	delete(0);
+            return minCity;
+    	}
+    	else {
+    		return null;
+    	}
     }
 
     /**
@@ -79,7 +80,12 @@ public class Heap {
      * @param index - the index of the item to be deleted in the min-heap.
      */
     public void delete(int index) {
-    	minHeap.remove(index);
+    	
+    	swap(index, minHeap.size() - 1);
+    	minHeap.get(index).setCityIndex(index);
+    	minHeap.get(minHeap.size() - 1).setCityIndex(minHeap.size() - 1);
+    	minHeap.remove(minHeap.size()-1);
+
     	
     	siftDown(index);
     }
@@ -95,8 +101,11 @@ public class Heap {
     public void changeKey(City c, int newCost) {
         // TODO: implement this method
     	int index = c.getCityIndex();
+//    	c.setMinCost(newCost);
+//    	siftUp(index);
+    	delete(index);
     	c.setMinCost(newCost);
-    	siftUp(index);
+    	insertNode(c);
     }
 
     public String toString() {
@@ -113,10 +122,17 @@ public class Heap {
         }
         return output + "\n";
     }
+    public String toStringCost() {
+    	String output = "Heap(cost): ";
+    	for (int i = 0; i < minHeap.size(); i++) {
+            output += minHeap.get(i).getMinCost() + " ";
+        }
+        return output;
+    }
     
     public void siftUp(int i) {
     	int size = minHeap.size();
-    	int parent = (int)Math.ceil(i/2.0) - 1;
+    	int parent = (i/2) ;
     	int parentCity = minHeap.get(parent).getCityName();
     	
     	
@@ -178,12 +194,9 @@ public class Heap {
     //TODO: Swap function
     public void swap(int current, int small) {
 
-    	
-    	
     	City currentCity = minHeap.get(current); // should be current
     	 //currentCitys
 
-    	
     	minHeap.set(current, minHeap.get(small));//set smaller object to the current position
     	minHeap.set(small, currentCity);
     	
@@ -191,9 +204,9 @@ public class Heap {
     	minHeap.get(current).setCityIndex(current);
     	minHeap.get(small).setCityIndex(small);
     	
-    	System.out.println("Did a swap");
-    	System.out.println(toString());
-    	System.out.println(toStringIndex());
+//    	System.out.println("Did a swap");
+//    	System.out.println(toString());
+//    	System.out.println(toStringIndex());
     }
     
 ///////////////////////////////////////////////////////////////////////////////

@@ -158,11 +158,11 @@ public class Driver {
             // test out Program2.java here!
             System.out.println("Given graph: ");
             System.out.println(testProgram2);
-//            System.out.println("Cost of shortest path from start to dest: \n" +
-//                    testProgram2.findCheapestPathPrice(cities.get(0), cities.get(1)));
+            System.out.println("Cost of shortest path from start to dest: \n" +
+                    testProgram2.findCheapestPathPrice(cities.get(1), cities.get(2)));
 
             System.out.print("The shortest path from start to dest: \n");
-            for (City c : testProgram2.findCheapestPath(cities.get(1), cities.get(3))) {
+            for (City c : testProgram2.findCheapestPath(cities.get(1), cities.get(2))) {
                 System.out.print(c.getCityName() + " -> ");
             }
             System.out.print("(done)\n");

@@ -5,7 +5,7 @@ import java.util.*;
 public class City {
     private int minCost;
     private int cityName;
-    private int cityIndex = -100;
+    private int cityIndex = -1;
     private ArrayList<City> neighbors;
     private ArrayList<Integer> weights;
 
@@ -52,7 +52,9 @@ public class City {
     public void resetMinCost() {
         minCost = Integer.MAX_VALUE;
     }
-
+    public void resetCityIndex() {
+    	cityIndex = -1;
+    }
     public int getCityName() {
         return cityName;
     }
